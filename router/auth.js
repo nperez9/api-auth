@@ -11,6 +11,13 @@ const registerUserSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const loginUserSchema = Joi.object({
+  email: Joi.string()
+    .email()
+    .required(),
+  password: Joi.string().required(),
+});
+
 router.post('/register', async (req, res) => {
   const { name, password, email } = req.body;
   
@@ -35,6 +42,21 @@ router.post('/register', async (req, res) => {
   } catch (e) {
     res.status(400).json(e);
   }
+});
+
+router.post('/login', async (req, res) => {
+  const { password, email } = req.body;
+  
+  const { error } = loginUserSchema.validate(req.body);
+  if (error) return res.status(400).json(error.details);
+
+  const user = await User.findOne({email});
+  if (!user) return res.status(400).json({message: 'Invalid user', code: 1002});
+
+  const passValid = await bcrypt.compare(password, user.password);
+  if (!passValid) return res.status(400).json({message: 'Invalid password', code: 1003});
+
+  res.json({message: 'Successfull login'});
 });
 
 module.exports = router;
