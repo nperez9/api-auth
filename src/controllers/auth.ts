@@ -4,8 +4,6 @@ const Joi = require('@hapi/joi');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const privateRoute = require('../middlewares/auth.middleware');
-
 const registerUserSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string()

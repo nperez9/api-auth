@@ -1,9 +1,9 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
+import * as express from 'express';
+import mongoose from 'mongoose';
 const authRouter = require('./router/auth');
 const dotenv = require('dotenv');
 
+const app = express();
 dotenv.config();
 
 mongoose.connect(

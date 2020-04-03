@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken');
+import jtw from 'jsonwebtoken';
+import { Request, Response } from 'express';
 
-const privateRoute = (req, res, next) => {
+export const privateRoute = (req: Request, res, next) => {
   // TODO: check expiration Date
   const token = req.headers['auth-token'];
   if (!token) return res.status(403).json({message: 'You need to login to access this feature', code: 1005});
@@ -13,5 +14,3 @@ const privateRoute = (req, res, next) => {
     res.status(403).message({message: 'Invalid Token', code: 1006});
   }
 };
-
-module.exports = privateRoute;
