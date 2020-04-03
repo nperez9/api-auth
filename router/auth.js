@@ -2,6 +2,9 @@ const router = require('express').Router();
 const User = require('../models/User');
 const Joi = require('@hapi/joi');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const privateRoute = require('../middlewares/auth.middleware');
 
 const registerUserSchema = Joi.object({
   name: Joi.string().required(),
@@ -45,18 +48,30 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const { password, email } = req.body;
-  
-  const { error } = loginUserSchema.validate(req.body);
-  if (error) return res.status(400).json(error.details);
+  try {
+    const { password, email } = req.body;
+    
+    const { error } = loginUserSchema.validate(req.body);
+    if (error) return res.status(400).json(error.details);
 
-  const user = await User.findOne({email});
-  if (!user) return res.status(400).json({message: 'Invalid user', code: 1002});
+    const user = await User.findOne({email});
+    if (!user) return res.status(400).json({message: 'Invalid user', code: 1002});
 
-  const passValid = await bcrypt.compare(password, user.password);
-  if (!passValid) return res.status(400).json({message: 'Invalid password', code: 1003});
+    const passValid = await bcrypt.compare(password, user.password);
+    if (!passValid) return res.status(400).json({message: 'Invalid password', code: 1003});
 
-  res.json({message: 'Successfull login'});
+    const token = jwt.sign({id: user._id, email: user.email}, process.env.SECRET_TOKEN);
+
+    res.header({'auth-token': token});
+    res.json({token, message: 'Successfull login'});
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({message: 'Unexpected error', code: 1000});
+  }
+});
+
+router.get('/info', privateRoute, async (req, res) => {
+  return res.json(await User.findById(req.user.id));
 });
 
 module.exports = router;
