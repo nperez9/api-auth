@@ -1,13 +1,17 @@
 {
   "name": "api-auth",
   "version": "1.0.1",
-  "description": "",
+  "description": "A small api for login",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "auth",
+    "login",
+    "api"
+  ],
+  "author": "nperez9",
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^16.1.8",
