@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const { loginUserSchema, registerUserSchema } = require('../validators/user.validator');
-
+const { errorLog } = require('../utils/logger');
 const privateRoute = require('../middlewares/auth.middleware');
 
 router.post('/register', async (req, res) => {
@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
     const savedUser = await user.save();
     res.json({ email: savedUser.email, name: savedUser.name });
   } catch (e) {
-    console.error(e);
+    errorLog(e, req);
     res.status(500).json({ message: 'Unexpected error', code: 1000 });
   }
 });
@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
     res.header({ 'auth-token': token });
     res.json({ token, message: 'Successfull login' });
   } catch (e) {
-    console.error(e);
+    errorLog(e, req);
     res.status(500).json({ message: 'Unexpected error', code: 1000 });
   }
 });
