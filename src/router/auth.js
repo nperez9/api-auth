@@ -43,13 +43,20 @@ router.post('/login', async (req, res) => {
     const { password, email } = req.body;
 
     const { error } = loginUserSchema.validate(req.body);
-    if (error) return res.status(400).json(error.details);
+    
+    if (error) {
+     return res.status(400).json(error.details);
+    }
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid user', code: 1002 });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid user', code: 1002 });
+    }
 
     const passValid = await bcrypt.compare(password, user.password);
-    if (!passValid) return res.status(400).json({ message: 'Invalid password', code: 1003 });
+    if (!passValid) {
+      return res.status(400).json({ message: 'Invalid password', code: 1003 });
+    }
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET_TOKEN);
 

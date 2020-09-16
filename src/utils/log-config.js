@@ -8,7 +8,7 @@ const logFormat = format.combine(
   format.printf((log) => `${log.timestamp} - ${log.level} ${log.message}`),
 );
 
-loggers.add('123Logger', {
+loggers.add('apiAuthLogger', {
   format: logFormat,
   transports: [
     new WinstonDailyRotateFile({
@@ -24,5 +24,5 @@ loggers.add('123Logger', {
   ],
 });
 
-const logger = loggers.get('123Logger');
+const logger = loggers.get('apiAuthLogger');
 export default logger;
