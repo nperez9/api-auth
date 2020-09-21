@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const { loginUserSchema, registerUserSchema } = require('../validators/user.validator');
-const { errorLog } = require('../utils/logger');
+const { errorLog, infoLog, Results } = require('../utils/logger');
 const privateRoute = require('../middlewares/auth.middleware');
 
 router.post('/register', async (req, res) => {
@@ -40,12 +40,13 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
+    infoLog('Log in', req, Results.IN_PROGRESS);
     const { password, email } = req.body;
 
     const { error } = loginUserSchema.validate(req.body);
-    
+
     if (error) {
-     return res.status(400).json(error.details);
+      return res.status(400).json(error.details);
     }
 
     const user = await User.findOne({ email });
@@ -60,6 +61,7 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET_TOKEN);
 
+    infoLog('Logged', req, Results.SUCCESS);
     res.header({ 'auth-token': token });
     res.json({ token, message: 'Successfull login' });
   } catch (e) {
@@ -69,7 +71,13 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/info', privateRoute, async (req, res) => {
-  return res.json(await User.findById(req.user.id));
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    return res.status(404).json({ message: 'Invalid user logon', code: 1004 });
+  }
+
+  const { name, email } = user;
+  return res.json({ name, email });
 });
 
 module.exports = router;

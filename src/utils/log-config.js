@@ -1,5 +1,5 @@
-import { format, loggers, transports } from 'winston';
-import WinstonDailyRotateFile from 'winston-daily-rotate-file';
+const { format, loggers, transports } = require('winston');
+const WinstonDailyRotateFile = require('winston-daily-rotate-file');
 
 const logFormat = format.combine(
   format.colorize(),
@@ -25,4 +25,4 @@ loggers.add('apiAuthLogger', {
 });
 
 const logger = loggers.get('apiAuthLogger');
-export default logger;
+module.exports = logger;

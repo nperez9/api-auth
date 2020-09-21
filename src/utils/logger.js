@@ -1,4 +1,4 @@
-const logger = 'log-config';
+const logger = require('./log-config');
 
 const Levels = {
   info: 'info',
@@ -36,6 +36,7 @@ function log(level, message, action, success, params) {
  * Do an info whit the variables, parses Express request
  * @param {string} msg
  * @param {Request} req
+ * @param {Results} results
  */
 function infoLog(msg, req, result) {
   const action = `${req.method} ${req.url}`;
@@ -57,6 +58,7 @@ function errorLog(error, req) {
 }
 
 module.exports = {
+  Results,
   infoLog,
   errorLog,
 };
