@@ -1,13 +1,13 @@
-const formatNumber = (num) => {
+const formatNumber = (num: number) => {
   return num >= 10 ? num : `0${num}`;
 };
 
 /**
  * Returns hours minutes and seconds from seconds
- * @param sec {number}
+ * @param {number} sec
  * @returns string - Time formatted
  */
-function secondsToTime(sec) {
+export function secondsToTime(sec: number): string {
   const secs = Math.round(sec);
   const hours = Math.floor(secs / (60 * 60));
 
@@ -18,6 +18,4 @@ function secondsToTime(sec) {
   const seconds = formatNumber(Math.ceil(divisorForSeconds));
 
   return `${hours}hh:${minutes}mm:${seconds}ss`;
-}
-
-module.exports = { secondsToTime };
+};

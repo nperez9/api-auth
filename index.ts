@@ -1,5 +1,4 @@
-const express = require('express');
-const app = express();
+import express, { json } from 'express';
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
@@ -8,6 +7,8 @@ const swaggerConfig = require('./src/utils/swagger');
 const authRouter = require('./src/router/auth');
 const healthRouter = require('./src/router/health');
 dotenv.config();
+
+const app = express();
 
 mongoose.connect(
   process.env.DB_CONNECTION,
@@ -18,7 +19,7 @@ mongoose.connect(
   () => console.info('conected to DB'),
 );
 
-app.use(express.json());
+app.use(json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
 app.use('/api/user', authRouter);
