@@ -2,9 +2,9 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/User');
+const User = require('../models/User.model');
 const { loginUserSchema, registerUserSchema } = require('../validators/user.validator');
-const { errorLog, infoLog, Results } = require('../utils/logger');
+const { errorLog, infoLog, Results } = require('../utils/logger/logger');
 const privateRoute = require('../middlewares/auth.middleware');
 
 router.post('/register', async (req, res) => {
