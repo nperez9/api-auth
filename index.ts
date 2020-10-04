@@ -5,7 +5,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerConfig = require('./src/utils/swagger');
 
 const authRouter = require('./src/router/auth');
-const healthRouter = require('./src/router/health');
+
 dotenv.config();
 
 const app = express();
@@ -22,7 +22,6 @@ mongoose.connect(
 app.use(json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
-app.use('/api/user', authRouter);
-app.use('/health', healthRouter);
+app.use('/api', authRouter);
 
 app.listen(3000, () => console.info('Server listening at 3000'));

@@ -1,30 +1,34 @@
-const logger = require('./log-config');
+import { Request } from 'express';
+import { ResultsLog } from '../../constants';
+import logger from './log-config';
 
 const Levels = {
   info: 'info',
   error: 'error',
 };
 
-const Results = {
-  SUCCESS: 'SUCCESS',
-  FAIL: 'FAIL',
-  IN_PROGRESS: 'IN_PROGRESS',
-};
-
 const defaultValue = {
   info: {
     action: 'generic',
-    success: Results.SUCCESS,
+    success: ResultsLog.SUCCESS,
     params: {},
   },
   error: {
     action: 'generic',
-    success: Results.FAIL,
+    success: ResultsLog.FAIL,
     params: {},
   },
 };
 
-function log(level, message, action, success, params) {
+/**
+ * Just a log which formats the code
+ * @param level 
+ * @param message 
+ * @param action 
+ * @param success 
+ * @param params 
+ */
+function log(level: string, message: string, action: string, success: string, params: any): void {
   const logAction = action || defaultValue[level].action;
   const logSuccess = success || defaultValue[level].success;
   const logParams = params || defaultValue[level].params;
@@ -38,7 +42,7 @@ function log(level, message, action, success, params) {
  * @param {Request} req
  * @param {Results} results
  */
-function infoLog(msg, req, result) {
+function infoLog(msg: string, req: Request, result: ResultsLog) {
   const action = `${req.method} ${req.url}`;
   const { body, params, query } = req;
   const message = `Message: ${msg}`;
@@ -50,15 +54,9 @@ function infoLog(msg, req, result) {
  * @param {Error} error
  * @param {Request} req
  */
-function errorLog(error, req) {
+export function errorLog(error: Error, req: Request): void {
   const message = `Message: ${error.message} - StackTrace: ${error.stack}`;
   const action = `${req.method} ${req.url}`;
   const { body, params, query } = req;
-  log(Levels.error, message, action, Results.FAIL, { body, params, query });
+  log(Levels.error, message, action, ResultsLog.FAIL, { body, params, query });
 }
-
-module.exports = {
-  Results,
-  infoLog,
-  errorLog,
-};
