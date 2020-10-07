@@ -42,7 +42,7 @@ function log(level: string, message: string, action: string, success: string, pa
  * @param {Request} req
  * @param {Results} results
  */
-function infoLog(msg: string, req: Request, result: ResultsLog) {
+export function infoLog(msg: string, req: Request, result: ResultsLog): void {
   const action = `${req.method} ${req.url}`;
   const { body, params, query } = req;
   const message = `Message: ${msg}`;

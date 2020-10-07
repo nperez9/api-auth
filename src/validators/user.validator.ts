@@ -1,6 +1,5 @@
 import Joi from '@hapi/joi';
 
-// TODO: add custom error messages
 export const registerUserSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),

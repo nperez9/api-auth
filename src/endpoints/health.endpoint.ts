@@ -3,11 +3,11 @@ import { secondsToTime } from '../utils';
 
 /**
  * Returns the health of the app with some additional info
- * @param {Request} req 
- * @param {Response} res 
+ * @param {Request} req Express request
+ * @param {Response} res Express response
  */
-export const healthEndpoint = (req: Request, res: Response) => {
-  return res.json({
+export const healthEndpoint = (req: Request, res: Response): void => {
+  res.json({
     status: 'UP',
     description: 'Health of auth service',
     time: new Date().toISOString(),
