@@ -44,9 +44,9 @@ function log(level: Levels, message: string, action: string, success: string, pa
  */
 export function infoLog(msg: string, req: Request, result: ResultsLog): void {
   const action = `${req.method} ${req.url}`;
-  const { body, params, query } = req;
+  const { params, query } = req;
   const message = `Message: ${msg}`;
-  log(Levels.info, message, action, result, { body, params, query });
+  log(Levels.info, message, action, result, { params, query });
 }
 
 /**

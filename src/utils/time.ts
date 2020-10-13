@@ -1,4 +1,8 @@
-const formatNumber = (num: number) => {
+/**
+ * redounts the number
+ * @param num number
+ */
+const formatNumber = (num: number): number | string => {
   return num >= 10 ? num : `0${num}`;
 };
 
