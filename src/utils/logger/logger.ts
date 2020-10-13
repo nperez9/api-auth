@@ -2,10 +2,10 @@ import { Request } from 'express';
 import { ResultsLog } from '../../constants';
 import logger from './log-config';
 
-const Levels = {
-  info: 'info',
-  error: 'error',
-};
+enum Levels {
+  info = 'info',
+  error = 'error',
+}
 
 const defaultValue = {
   info: {
@@ -28,7 +28,7 @@ const defaultValue = {
  * @param success 
  * @param params 
  */
-function log(level: string, message: string, action: string, success: string, params: any): void {
+function log(level: Levels, message: string, action: string, success: string, params: any): void {
   const logAction = action || defaultValue[level].action;
   const logSuccess = success || defaultValue[level].success;
   const logParams = params || defaultValue[level].params;

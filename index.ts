@@ -1,17 +1,17 @@
 import express, { json } from 'express';
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const swaggerUi = require('swagger-ui-express');
-const swaggerConfig = require('./src/utils/swagger');
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+// import swaggerUi from 'swagger-ui-express';
+// import swaggerConfig from './src/utils/swagger';
 
-const authRouter = require('./src/router/auth');
+import apiRoutes from './src/api.routes'
 
 dotenv.config();
 
 const app = express();
 
 mongoose.connect(
-  process.env.DB_CONNECTION,
+  process.env.DB_CONNECTION as string,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -21,7 +21,7 @@ mongoose.connect(
 
 app.use(json());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
-app.use('/api', authRouter);
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig));
+app.use('/api', apiRoutes);
 
 app.listen(3000, () => console.info('Server listening at 3000'));

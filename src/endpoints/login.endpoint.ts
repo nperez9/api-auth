@@ -8,7 +8,7 @@ import UserModel from '../models/user.model';
 import { errorResponse, successResponse } from '../utils';
 import { ERROR } from '../constants';
 
-export const LoginEndpoint = async (req: Request, res: Response): Promise<void> => {
+export const loginEndpoint = async (req: Request, res: Response): Promise<void> => {
   try {
     infoLog('Log in', req, ResultsLog.IN_PROGRESS);
     const { password, email } = req.body;
