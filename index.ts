@@ -1,23 +1,16 @@
-import express, { json } from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+dotenv.config();
+
+import express, { json } from 'express';
+import { connectToMongo } from './src/database/conecction';
 // import swaggerUi from 'swagger-ui-express';
 // import swaggerConfig from './src/utils/swagger';
 
 import apiRoutes from './src/api.routes'
 
-dotenv.config();
+connectToMongo();
 
 const app = express();
-
-mongoose.connect(
-  process.env.DB_CONNECTION as string,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => console.info('conected to DB'),
-);
 
 app.use(json());
 
