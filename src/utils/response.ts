@@ -6,8 +6,14 @@ import { Response } from 'express';
  * @param {any} responseBody the response data
  * @param {number} code Http Code
  */
-export const successResponse = (res: Response, responseBody?: any, code: number = 200): void => {
-  res.status(code).json(responseBody);
+export const successResponse = (res: Response, responseBody?: string | any, code: number = 200): void => {
+  let response = responseBody;
+  
+  if (typeof responseBody === 'string') {
+    response = { message: responseBody };
+  }
+
+  res.status(code).json(response);
 }
 
 /**
