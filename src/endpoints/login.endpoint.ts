@@ -24,7 +24,7 @@ export const loginEndpoint = async (req: Request, res: Response): Promise<void> 
     }
 
     //TODO: move to a library
-    const token = jwt.sign({ id: user._id, email: user.email }, process.env.SECRET_TOKEN as Secret);
+    const token = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.SECRET_TOKEN as Secret);
 
     infoLog('Logged', req, ResultsLog.SUCCESS);
     

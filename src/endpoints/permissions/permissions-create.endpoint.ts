@@ -8,13 +8,14 @@ import { errorLog } from '../../utils/logger/logger';
 export const permissionsCreateEndpoint = async (req: Request, res: Response): Promise<void> => {
   try {
     const { code, endpoint, description } = req.body;
-    const result = await PermissionModel.create({ code, endpoint, description });
-    
-    if (result) {
-      return errorResponse(res, 500, 'Error');
+
+    const permissionExist = await PermissionModel.findOne({ code });
+    if (permissionExist) {
+      return errorResponse(res, 400, 'This code already exist');
     }
 
-    successResponse(res, RESPONSES.PERMISSION_CREATED);
+    const result = await PermissionModel.create({ code, endpoint, description });
+    successResponse(res, { message: RESPONSES.PERMISSION_CREATED, code: result.code, endpoint: result.endpoint });
   } catch(e) {
     errorLog(e, req);
     errorResponse(res, 500, ERROR.DEFAULT);

@@ -14,7 +14,7 @@ export const privateRoute = (req: CustomRequest, res: Response, next: NextFuncti
 
   try {
     const user = jwt.verify(token, process.env.SECRET_TOKEN as Secret);
-    req.data.user = user;
+    req.data = { ...req.data, user };
     next();
   } catch (e) {
     errorLog(e, req);

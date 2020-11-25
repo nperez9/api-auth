@@ -10,7 +10,7 @@ export const successResponse = (res: Response, responseBody?: string | any, code
   let response = responseBody;
   
   if (typeof responseBody === 'string') {
-    response = { message: responseBody };
+    response = { message: responseBody, status: 'success' };
   }
 
   res.status(code).json(response);
