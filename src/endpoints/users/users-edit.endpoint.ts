@@ -1,13 +1,12 @@
-import { Response } from 'express';
+import { NextFunction, Response } from 'express';
 
-import { CustomRequest } from '../../interfaces/request.interface';
+import { CustomRequest, User } from '../../interfaces';
 import UserModel from '../../models/user.model';
 import { errorResponse, successResponse } from '../../utils';
 import { ERROR } from '../../constants';
-import { User } from '../../interfaces';
-import { errorLog } from '../../utils/logger/logger';
 
-export const userInfoEndpoint = async (req: CustomRequest, res: Response): Promise<void> => {
+export const userEditEndpoint =
+async (req: CustomRequest, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id } = req.data.user;
     const user = await UserModel.findById(id);
@@ -19,7 +18,6 @@ export const userInfoEndpoint = async (req: CustomRequest, res: Response): Promi
     const { name, email } = user as User;
     successResponse(res, {name, email});
   } catch (e) {
-    errorLog(e, req);
-    errorResponse(res, 500, ERROR.DEFAULT);
+    next(e);
   }
 };
