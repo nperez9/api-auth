@@ -1,10 +1,10 @@
 import express, { json } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+dotenv.config();
 
 import apiRoutes from './src/api.routes'
-
-dotenv.config();
+import { errorGenericMiddleware } from './src/middlewares';
 
 const app = express();
 
@@ -20,5 +20,7 @@ mongoose.connect(
 app.use(json());
 
 app.use('/api', apiRoutes);
+
+app.use(errorGenericMiddleware);
 
 app.listen(3000, () => console.info('Server listening at 3000'));

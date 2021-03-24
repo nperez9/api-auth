@@ -1,7 +1,6 @@
-import jwt, { Secret } from 'jsonwebtoken';
 import { Response, NextFunction } from 'express';
 import { errorLog } from '../utils/logger/logger';
-import { errorResponse } from '../utils';
+import { errorResponse, JWTUtil } from '../utils';
 import { ERROR } from '../constants/errors';
 import { CustomRequest } from '../interfaces/request.interface';
   
@@ -13,7 +12,7 @@ export const privateRoute = (req: CustomRequest, res: Response, next: NextFuncti
   }
 
   try {
-    const user = jwt.verify(token, process.env.SECRET_TOKEN as Secret);
+    const user = JWTUtil.createToken(token);
     req.data = { ...req.data, user };
     next();
   } catch (e) {

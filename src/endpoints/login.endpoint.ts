@@ -1,14 +1,14 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import jwt, { Secret } from 'jsonwebtoken';
 
-import { errorLog, infoLog } from "../utils/logger/logger";
+import { infoLog } from '../utils/logger/logger';
 import { ResultsLog, MESSAGE } from '../constants';
 import UserModel from '../models/user.model';
-import { errorResponse, successResponse } from '../utils';
+import { errorResponse, successResponse, JWTUtil } from '../utils';
 import { ERROR } from '../constants';
 
-export const loginEndpoint = async (req: Request, res: Response): Promise<void> => {
+export const loginEndpoint =
+async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     infoLog('Log in', req, ResultsLog.IN_PROGRESS);
     const { password, email } = req.body;
@@ -23,15 +23,12 @@ export const loginEndpoint = async (req: Request, res: Response): Promise<void> 
       return errorResponse(res, 400, ERROR.INVALID_LOGIN);
     }
 
-    //TODO: move to a library
-    const token = jwt.sign({ id: user._id, email: user.email, role: user.role }, process.env.SECRET_TOKEN as Secret);
-
+    const token = JWTUtil.createToken({ id: user._id, email: user.email, role: user.role });
     infoLog('Logged', req, ResultsLog.SUCCESS);
-    
+
     res.header({ 'auth-token': token });
-    successResponse(res, { token, message: MESSAGE.LOGIN })
+    successResponse(res, { token, message: MESSAGE.LOGIN });
   } catch (e) {
-    errorLog(e, req);
-    errorResponse(res, 500, ERROR.DEFAULT);
+    next(e);
   }
 };
