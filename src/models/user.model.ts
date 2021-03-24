@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, max: 255, unique: true },
   password: { type: String, required: true, max: 1024 },
   role: { type: String, required: true, default: Roles.USER },
-  created_at: { type: Date, default: Date.now },
+  recoveryCode: { type: String, max: 2056 },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const userModel = mongoose.model<IUserModel>('user', userSchema, 'users');

@@ -6,7 +6,7 @@ import { Response } from 'express';
  * @param {any} responseBody the response data
  * @param {number} code Http Code
  */
-export const successResponse = (res: Response, responseBody?: string | any, code: number = 200): void => {
+export const successResponse = (res: Response, responseBody?: string | any, code = 200): void => {
   let response = responseBody;
   
   if (typeof responseBody === 'string') {

@@ -10,6 +10,7 @@ import { errorLog } from '../../utils/logger/logger';
 export const userInfoEndpoint = async (req: CustomRequest, res: Response): Promise<void> => {
   try {
     const { id } = req.data.user;
+    console.info(req.data.user)
     const user = await UserModel.findById(id);
   
     if (!user) {

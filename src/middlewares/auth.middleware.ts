@@ -12,7 +12,7 @@ export const privateRoute = (req: CustomRequest, res: Response, next: NextFuncti
   }
 
   try {
-    const user = JWTUtil.createToken(token);
+    const user = JWTUtil.verifyToken(token);
     req.data = { ...req.data, user };
     next();
   } catch (e) {

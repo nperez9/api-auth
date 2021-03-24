@@ -7,6 +7,7 @@ export interface User {
   name: string,
   email: string,
   password: string,
-  date?: string,
-  role?: Roles 
+  recoveryCode?: string,
+  createdAt?: string,
+  role?: Roles
 }

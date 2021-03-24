@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "3e39b2f6-0956-4a85-97e9-63d0bdd12555",
+		"name": "api-auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"nicolasperez95.a@gmail.com\",\n\t\"password\": \"asd123\",\n\t\"name\": \"Nicolas Agustin Perez\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"nicolasperez95.a@gmail.com\",\n\t\"password\": \"asd123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNWFkYzBkOTg2ZTEzMjBmYTZmNjI3NyIsImVtYWlsIjoibmljb2xhc3BlcmV6OTUuYUBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTYxNjU2ODIyOX0.gcNM2BhnOIOmBmKbj2OCn-5N8kTpwVLUwFYQHe04U90",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/users/info",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Permission Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYmRkZWU0YTJjNmQ3MmJiMGQ3OWU3OCIsImVtYWlsIjoibmljb2xhc3BlcmV6OTUuYUBnbWFpbC5jb20iLCJpYXQiOjE2MDYyNzkwMTJ9.SOWpd0i_AHaM335zJFBfFrX8o8u899dNj5RVxRPeAXg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"ALL_USER\",\r\n    \"endpoint\": \"ALL /user\",\r\n    \"description\": \"Permission for all user endpoints\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
