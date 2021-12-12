@@ -16,7 +16,7 @@ export const privateRoute = (req: CustomRequest, res: Response, next: NextFuncti
     req.data = { ...req.data, user };
     next();
   } catch (e) {
-    errorLog(e, req);
+    errorLog(e as Error, req);
     errorResponse(res, 403, ERROR.INVALID_TOKEN);
   }
 };

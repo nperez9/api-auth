@@ -12,3 +12,8 @@ export interface User {
   createdAt?: string,
   role?: Roles
 }
+
+export interface SharedUser {
+  _id: string;
+  name: string;
+}
