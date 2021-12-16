@@ -5,12 +5,13 @@ export enum Roles {
 }
 
 export interface User {
-  name: string,
-  email: string,
-  password: string,
-  recoveryCode?: string,
-  createdAt?: string,
-  role?: Roles
+  name: string;
+  email: string;
+  password: string;
+  recoveryCode?: string;
+  createdAt?: string;
+  role?: Roles;
+  placesLimit?: number;
 }
 
 export interface SharedUser {
