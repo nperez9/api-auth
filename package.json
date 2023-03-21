@@ -18,12 +18,10 @@
   "author": "nperez9",
   "license": "ISC",
   "dependencies": {
-    "@hapi/joi": "^16.1.8",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.1",
     "mongoose": "^5.9.16",
     "node-cache": "^5.1.2",
     "swagger-ui-express": "^4.1.4",
@@ -33,7 +31,6 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "4.17.6",
-    "@types/hapi__joi": "17.1.3",
     "@types/jest": "25.2.3",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.7.36",

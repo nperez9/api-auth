@@ -7,4 +7,4 @@ export const ERROR = {
   NOT_SING_IN: 'You need to login to access this feature',
   EXISTING_EMAIL: 'User email already exists',
   NOT_PERMISSIONS: 'You dont have the permissions the realize this action',
-}
+};
