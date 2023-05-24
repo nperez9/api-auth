@@ -1,0 +1,35 @@
+export enum Platfroms {
+  PC = 'PC',
+  // Sega
+  SEGA_MS = 'Sega Master System',
+  SEGA_MD = 'Sega Mega Drive/Genesis',
+  SEGA_S = 'Sega Saturn',
+  DREAMCAST = 'Sega Dreamcast',
+  // Nintendo
+  NES = 'Nintendo Entertainment System',
+  SNES = 'Super Nintendo',
+  N64 = 'Nintendo 64',
+  GC = 'GameCube',
+  WII = 'Wii',
+  WIIU = 'Wii U',
+  SWITCH = 'Nintendo Switch',
+  GB = 'Game Boy',
+  GBC = 'Game Boy Color',
+  GBA = 'Game Boy Advance',
+  NDS = 'Nintendo DS',
+  N3DS = 'Nintendo 3DS',
+  NDSi = 'Nintendo DSi',
+  // Playstation
+  PS1 = 'PlayStation 1',
+  PS2 = 'PlayStation 2',
+  PS3 = 'PlayStation 3',
+  PS4 = 'PlayStation 4',
+  PS5 = 'PlayStation 5',
+  PSP = 'PlayStation Portable',
+  PSVITA = 'PlayStation Vita',
+  // Xbox
+  XBOX = 'Xbox',
+  X360 = 'Xbox 360',
+  XONE = 'Xbox One',
+  XSERIES = 'Xbox Series X/S',
+}
