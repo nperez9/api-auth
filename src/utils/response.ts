@@ -8,13 +8,13 @@ import { Response } from 'express';
  */
 export const successResponse = (res: Response, responseBody?: string | any, code = 200): void => {
   let response = responseBody;
-  
+
   if (typeof responseBody === 'string') {
     response = { message: responseBody, status: 'success' };
   }
 
   res.status(code).json(response);
-}
+};
 
 /**
  * Return a error response, unifies the format
@@ -29,4 +29,4 @@ export const errorResponse = (res: Response, code: number, message: string, addi
     message,
     additionalData,
   });
-}
+};

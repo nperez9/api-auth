@@ -1,4 +1,5 @@
 export enum Platfroms {
+  ALL = 'ALL',
   PC = 'PC',
   // Sega
   SEGA_MS = 'Sega Master System',

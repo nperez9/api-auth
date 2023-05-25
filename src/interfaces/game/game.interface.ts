@@ -1,8 +1,10 @@
 import { Genres } from './genres.interface';
 import { Platfroms } from './platforms.interface';
 
+/**
+ * This interface is open to a lot of changes
+ */
 export interface Game {
-  _id: number;
   name: string;
   year: number;
   platforms: Platfroms[];
@@ -16,4 +18,5 @@ export interface Game {
   // Recalculate prom score for every user ranks
   userPromScore?: number;
   genre?: Genres[];
+  createdAt?: string;
 }
