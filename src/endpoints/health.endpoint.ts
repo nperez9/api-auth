@@ -7,7 +7,7 @@ import { secondsToTime } from '../utils';
  * @param {Response} res Express response
  */
 export const healthEndpoint = (req: Request, res: Response): void => {
-  res.json({
+  res.status(200).json({
     status: 'UP',
     description: 'Health of auth service',
     time: new Date().toISOString(),
@@ -15,4 +15,3 @@ export const healthEndpoint = (req: Request, res: Response): void => {
     version: process.env.npm_package_version,
   });
 };
-

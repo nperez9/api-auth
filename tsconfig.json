@@ -14,7 +14,8 @@
     "isolatedModules": true,
     "baseUrl": ".",
     "noFallthroughCasesInSwitch": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "useUnknownInCatchVariables": false
   },
   "compileOnSave": true,
   "include": ["."]

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { ObjectSchema } from '@hapi/joi';
+import { ObjectSchema } from 'joi';
 import { errorResponse } from '../utils';
 
 export const validateBodyMiddleware = (validationSchema: ObjectSchema): RequestHandler => {
@@ -7,9 +7,9 @@ export const validateBodyMiddleware = (validationSchema: ObjectSchema): RequestH
     const { error } = validationSchema.validate(req.body);
 
     if (error) {
-      errorResponse(res, 400, error.message, error.details);
+      return errorResponse(res, 400, error.message, error.details);
     }
 
     next();
-  }
-}
+  };
+};
